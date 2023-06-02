@@ -9,8 +9,6 @@
 #include <wiringPi.h>
 #include "bme280.h"
 
-// g++ -o myproject main.cpp bme280.cpp -lwiringPi
-
 int main() {
 // char * device = "/dev/i2c-0";
 const char * device = "/dev/i2c-1";
@@ -27,9 +25,9 @@ const char * device = "/dev/i2c-1";
       return -1;
     }
 
-    printf("fd       : 0x%02x\n", fd);
-    printf("chip id  : 0x%02x\n", bme280->getChipId());
-    printf("chip ver : 0x%02x\n", bme280->getChipVersion());
+//    printf("fd       : 0x%02x\n", fd);
+//    printf("chip id  : 0x%02x\n", bme280->getChipId());
+//    printf("chip ver : 0x%02x\n", bme280->getChipVersion());
 
     bme280->reset();
     bme280->setPowerMode(BME280_NORMAL_MODE);
@@ -39,6 +37,7 @@ const char * device = "/dev/i2c-1";
     bme280->setIrrFilter(BME280_FILTER_COEFF_16);
     bme280->setStandbyTime(BME280_STANDBY_TIME_250_MS);
 
+/*
     printf("---------------\n");
     printf("pw mode  : 0x%02x\n", bme280->getPowerMode());
     printf("osrs_p   : 0x%02x\n", bme280->getPressureOversampling());
@@ -52,23 +51,23 @@ const char * device = "/dev/i2c-1";
     printf("measuring: 0x%02x\n", bme280->getMeasuringStatus());
     printf("im_update: 0x%02x\n", bme280->getImUpdateStatus());
     printf("---------------\n");
-
+*/
  //   while (1) {
 //      delay(1000);
       BMP280Data * bme280Data = bme280->getBMP280Data();
-      printf("pressure   : %.2f \tmm Hg\n", bme280Data->getPressure() / 1.3332239);
-      printf("humidity   : %.2f \t%c\n", bme280Data->getHumidity(), '%');
-      printf("temperature: %.2f \t°C\n", bme280Data->getTemperature());
-      printf("altitude   : %.2f \tm\n\n", bme280Data->getAltitude());
-	  
+
+/*	  
+    printf("pressure   : %.2f \tmm Hg\n", bme280Data->getPressure() / 1.3332239);
+    printf("humidity   : %.2f \t%c\n", bme280Data->getHumidity(), '%');
+    printf("temperature: %.2f \t°C\n", bme280Data->getTemperature());
+    printf("altitude   : %.2f \tm\n\n", bme280Data->getAltitude());
+*/
 	printf("{\n");
 	printf("  \"pressure\": %.2f,\n", bme280Data->getPressure() / 1.3332239);
 	printf("  \"humidity\": %.2f,\n", bme280Data->getHumidity());
 	printf("  \"temperature\": %.2f,\n", bme280Data->getTemperature());
 	printf("  \"altitude\": %.2f\n", bme280Data->getAltitude());
 	printf("}\n");
-	  
-	  
 	  
 //    }
     delete bme280;
