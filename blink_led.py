@@ -3,10 +3,17 @@
 
 import RepkaPi.GPIO as GPIO
 GPIO.setboard(GPIO.REPKAPI3)
-GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
+#pin = 11
+
+#GPIO.setmode(GPIO.BCM)          # выбираем тип обращения к GPIO по номеру BCM
+#pin = 17
+
+GPIO.setmode(GPIO.SUNXI)
+pin = "PA8"
+
 from time import sleep
 
-pin = 11
 GPIO.setup(pin, GPIO.OUT)
 
 try:
