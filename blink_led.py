@@ -2,17 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import RepkaPi.GPIO as GPIO
+from time import sleep
+
 GPIO.setboard(GPIO.REPKAPI3)
+
 #GPIO.setmode(GPIO.BOARD)
 #pin = 11
 
-#GPIO.setmode(GPIO.BCM)          # выбираем тип обращения к GPIO по номеру BCM
+#GPIO.setmode(GPIO.BCM)
 #pin = 17
 
 GPIO.setmode(GPIO.SUNXI)
 pin = "PA8"
-
-from time import sleep
 
 GPIO.setup(pin, GPIO.OUT)
 
@@ -22,12 +23,7 @@ try:
         GPIO.output(pin, 1)
         sleep(0.1)
         GPIO.output(pin, 0)
-        sleep(0.1)
-        GPIO.output(pin, 1)
-        sleep(0.1)
-        GPIO.output(pin, 0)
-        sleep(0.5)
-
+        sleep(1)
 except KeyboardInterrupt:
     GPIO.output(pin, 0)
     GPIO.cleanup()
