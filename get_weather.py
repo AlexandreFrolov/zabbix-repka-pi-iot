@@ -48,7 +48,7 @@ with canvas(device) as draw:
       draw.text((0, 40), "No water: "  + str(no_water), font=font, fill="white")
     else:
       draw.text((0, 40), "WATER DETECTED!", font=font, fill="white")
-sleep(3)
+sleep(10)
 device.command(0xAE)
 
 sleep(1)
